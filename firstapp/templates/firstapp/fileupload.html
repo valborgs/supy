@@ -1,0 +1,10 @@
+﻿{% extends 'firstapp/base.html' %}
+{% block content %}
+<div class="container">
+    <form method="POST" action="{% url 'firstapp:fileupload' %}" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ fileuploadForm }}
+        <input type="submit" class="btn btn-primary col-12" value="제출">
+    </form>
+</div>
+{% endblock%}

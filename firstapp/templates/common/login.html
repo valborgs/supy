@@ -1,0 +1,21 @@
+{% extends 'firstapp/base.html' %}
+ 
+{% block content %}
+<div class="jumbotron">
+  <h2>Please Login:</h2>
+  <h3>로그인 해주세요.</h3>
+ 
+  <form action="{% url 'common:login' %}" method="post">
+    {% csrf_token %}
+
+      {{ form.as_p }}
+    {% include "form_errors.html" %}
+      <input type="submit" class="btn btn-primary" value="Login">
+      <input type="hidden" name="next" value="{{ Next }}" />
+  </form>
+    
+  <div class="col-8 text-right">
+    <span>또는 <a href="{% url 'common:signup' %}">계정을 만드세요.</a></span>
+  </div>
+</div>
+{% endblock %}

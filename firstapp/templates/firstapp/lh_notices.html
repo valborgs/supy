@@ -1,0 +1,51 @@
+{% extends 'firstapp/base.html' %}
+{% block content %}
+        <center>
+            <H1>행복주택 공고</H1>
+        </center>
+<div align="right">
+    <form name="frm">
+    <select class="browser-default" id="changeLoc" name="PAN_SS" onchange="document.frm.submit();">
+        {% if not status %}
+        <option value="" selected>전체</option>
+        <option value="공고중">공고중</option>
+        <option value="접수중">접수중</option>
+        <option value="접수마감">접수마감</option>
+        {% elif status == "공고중" %}
+        <option value="">전체</option>
+        <option value="공고중" selected>공고중</option>
+        <option value="접수중">접수중</option>
+        <option value="접수마감">접수마감</option>
+        {% elif status == "접수중" %}
+        <option value="">전체</option>
+        <option value="공고중">공고중</option>
+        <option value="접수중" selected>접수중</option>
+        <option value="접수마감">접수마감</option>
+        {% elif status == "접수마감" %}
+        <option value="">전체</option>
+        <option value="공고중">공고중</option>
+        <option value="접수중">접수중</option>
+        <option value="접수마감" selected>접수마감</option>
+        
+        {% endif %}
+        
+    </select>
+    </form>
+</div>
+{% for notice in notices %}
+        <a href="{{ notice.DTL_URL }}" target="blank">
+            <div class='card-panel'>
+                <p>상태: {{ notice.PAN_SS }}</p>
+                <p>공고유형: {{ notice.UPP_AIS_TP_NM }}</p>
+                <p>공고세부유형: {{ notice.AIS_TP_CD_NM }}</p>
+                <p>공고명: {{ notice.PAN_NM }}</p>
+                <p>지역: {{ notice.CNP_CD_NM }}</p>
+            </div>
+        </a>
+{% empty %}
+        <h2>데이터가 없습니다.</h2>
+{% endfor %}
+<script>
+document.querySelector('#changeLoc').style.width="20%"
+</script>
+{% endblock %}

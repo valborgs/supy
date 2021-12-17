@@ -1,0 +1,10 @@
+{% extends 'firstapp/base.html' %}
+{% load static %}
+{% block content %}
+        <center>
+            <p>Hello There!</p>
+            <img src="{% static 'ttabong.jpg' %}">
+            <p>Nice!</p>
+            <a href="{% url 'firstapp:post_list' %}">Enter</a>
+        </center>
+{% endblock %}

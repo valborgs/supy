@@ -1,0 +1,30 @@
+{% extends 'firstapp/base.html' %}
+{% block content %}
+        <center>
+            <H1>Stocks</H1>
+            <form>
+                <div class="input-field">
+                      <input id="search" type="search" name="sname" required>
+                      <label class="label-icon" for="search"><i class="material-icons">search</i></label>
+                      <i class="material-icons">close</i>
+                </div>
+            </form>
+        </center>
+
+<div class='row'>
+    {% for stock in stocks %}
+    <div class='card-panel col s3'>
+        <p>eltscYn: {{ stock.eltscYn }}</p>
+        <p>영문 종목명: {{ stock.engSecnNm }}</p>
+        <p>종목번호: {{ stock.isin }}</p>
+        <p>발행일: {{ stock.issuDt }}</p>
+        <p>발행회사번호: {{ stock.issucoCustno }}</p>
+        <p>국문종목명: {{ stock.korSecnNm }}</p>
+        <p>주식종류: {{ stock.secnKacdNm }}</p>
+    </div>
+    {% empty %}
+    <h2>데이터가 없습니다.</h2>
+    {% endfor %}
+</div>
+
+{% endblock %}

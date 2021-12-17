@@ -1,0 +1,67 @@
+{% load static %}
+<html>
+    <head>
+        <title>supy</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <style>
+            @media (max-width: 768px) {
+                .container {
+                    margin: 0px;
+                    width: 100%;
+                }
+                div {
+                    word-break:break-all;
+                }
+                .card-panel p {
+                    text-overflow:ellipsis;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+        <nav>
+            <div class="nav-wrapper">
+                <a href="{% url 'firstapp:index' %}" class="brand-logo right">Logo</a>
+                <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+                <ul id="nav-mobile" class="left hide-on-med-and-down">
+                    <li><a href="{% url 'firstapp:index' %}">main</a></li>
+                    <li><a href="{% url 'firstapp:post_list' %}">Posts</a></li>
+                    <li><a href="{% url 'firstapp:view_stock' %}?sname=카카오">Stocks</a></li>
+                    <li><a href="{% url 'firstapp:lh_notice' %}">LH</a></li>
+                    {% if user.is_authenticated %}
+                    <!--li><a href="">Mypage</a></li-->
+                    <li><a href="{% url 'common:logout' %}">Logout</a></li>    
+                    {% else %}
+                    <li><a href="{% url 'common:login' %}">Login</a></li>    
+                    {% endif %}
+                </ul>
+            </div>
+        </nav>
+          <ul class="sidenav" id="mobile-demo">
+                <li><a href="{% url 'firstapp:index' %}">main</a></li>
+                <li><a href="{% url 'firstapp:post_list' %}">Posts</a></li>
+                <li><a href="{% url 'firstapp:view_stock' %}?sname=카카오">Stocks</a></li>
+                <li><a href="{% url 'firstapp:lh_notice' %}">LH</a></li>
+                {% if user.is_authenticated %}
+                <!--li><a href="">Mypage</a></li-->
+                <li><a href="{% url 'common:logout' %}">Logout</a></li>    
+                {% else %}
+                <li><a href="{% url 'common:login' %}">Login</a></li>    
+                {% endif %}
+          </ul>
+        {% block content %}
+        {% endblock %}
+        </div>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                var elems = document.querySelectorAll('.sidenav');
+                var instances = M.Sidenav.init(elems);
+            });
+        </script>
+    </body>
+</html>

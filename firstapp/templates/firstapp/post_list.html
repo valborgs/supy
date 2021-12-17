@@ -1,0 +1,55 @@
+{% extends 'firstapp/base.html' %}
+{% block content %}
+{% for post in posts %}
+    <div class='card-panel'>
+        <p>created: {{ post.created_date }}</p>
+        <h1><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h1>
+        <p>{{ post.text|linebreaksbr }}</p>
+    </div>
+{% endfor %}
+<center>
+    <ul class="pagination">
+        {% if posts.has_previous %}
+        <li class="waves-effect"><a href="?page={{ posts.previous_page_number }}"><i class="material-icons">chevron_left</i></a></li>
+        {% else %}
+        <li class="disabled"><a href="#!"><i class="material-icons">chevron_left</i></a></li>
+        {% endif %}
+        {% for page_number in posts.paginator.page_range %}
+            {% if page_number >= posts.number|add:-5 and page_number <= posts.number|add:5 %}
+                {% if page_number == posts.number %}                                                                                                     
+                <li class="active"><a href="?page={{ page_number }}">{{ page_number }}</a></li>
+                {% else %}
+                <li class="waves-effect"><a href="?page={{ page_number }}">{{ page_number }}</a></li>
+                {% endif %}
+            {% endif %}
+        {% endfor %}
+        {% if posts.has_next %}
+        <li class="waves-effect"><a href="?page={{ posts.next_page_number }}"><i class="material-icons">chevron_right</i></a></li>
+        {% else %}
+        <li class="disabled"><a href="#!"><i class="material-icons">chevron_right</i></a></li>
+        {% endif %}
+    </ul>
+    <!--form>
+        <div class="input-field">
+              <input id="search" type="search" required>
+              <label class="label-icon" for="search"><i class="material-icons">search</i></label>
+              <i class="material-icons">close</i>
+            <a class="btn-floating btn-large red">
+                <i class="large material-icons">mode_edit</i>
+            </a>
+        </div>
+
+    </form-->
+</center>
+<div class="fixed-action-btn">
+  <a href="{% url 'firstapp:post_new' %}" class="btn-floating btn-large waves-effect waves-light red">
+    <i class="large material-icons">mode_edit</i>
+  </a>
+</div>
+<script>
+$("div.card-panel").css("cursor","pointer")
+$("div.card-panel").on("click",function(){
+    location.href=$(this).find("a").attr("href");
+})
+</script>
+{% endblock %}

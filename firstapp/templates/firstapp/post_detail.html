@@ -1,0 +1,39 @@
+{% extends 'firstapp/base.html' %}
+{% block content %}
+<div>
+    <p>created: {{ post.created_date }}</p>
+    {% if post.modified_date %}
+		<p>last modified: {{ post.modified_date }}</p>
+    {% endif %}
+    {% if request.user == post.author %}
+    <a href="{% url 'firstapp:post_modify' post.id  %}" class="btn btn-sm btn-outline-secondary">수정</a>
+    <button data-uri="{% url 'firstapp:post_delete' post.id  %}" class="btn btn-sm btn-outline-secondary delete">삭제</button>
+    {% endif %}
+    <h1>{{ post.title }}</h1>
+    <p>{{ post.text|linebreaksbr }}</p>
+</div>
+
+<div class="fixed-action-btn">
+  <a href="{% url 'firstapp:post_new' %}" class="btn-floating btn-large waves-effect waves-light red">
+    <i class="large material-icons">mode_edit</i>
+  </a>
+</div>
+
+<script type='text/javascript'>
+{% if messages %}
+{% for message in messages %}
+var toastHTML = '<strong>{{ message.tags }}</strong><ul><li>{{ message.message }}</li></ul>';
+M.toast({html: toastHTML});    
+{% endfor %}
+{% endif %}
+
+$(document).ready(function(){
+    $(".delete").on('click', function() {
+        if(confirm("정말로 삭제하시겠습니까?")) {
+            location.href = $(this).data('uri');
+        }
+    });
+});
+</script>
+
+{% endblock %}
