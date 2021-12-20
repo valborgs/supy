@@ -20,12 +20,7 @@
 </div>
 
 <script type='text/javascript'>
-{% if messages %}
-{% for message in messages %}
-var toastHTML = '<strong>{{ message.tags }}</strong><ul><li>{{ message.message }}</li></ul>';
-M.toast({html: toastHTML});    
-{% endfor %}
-{% endif %}
+
 
 $(document).ready(function(){
     $(".delete").on('click', function() {

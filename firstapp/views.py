@@ -47,7 +47,7 @@ def post_new(request):
             post.author = request.user
             post.published_date = timezone.now()
             post.save()
-            return redirect('post_detail', pk=post.pk)
+            return redirect('firstapp:post_detail', pk=post.pk)
     else:
         form = PostForm()
     return render(request, 'firstapp/post_edit.html', {'form': form})
@@ -58,7 +58,7 @@ def post_modify(request, pk):
     post = get_object_or_404(Post, pk=pk)
     if request.user != post.author:
         messages.error(request, '수정권한이 없습니다')
-        return redirect('post_detail', pk=post.id)
+        return redirect('firstapp:post_detail', pk=post.id)
 
     if request.method == "POST":
         form = PostForm(request.POST, instance=post)
@@ -67,7 +67,7 @@ def post_modify(request, pk):
             post.author = request.user
             post.modified_date = timezone.now()  # 수정일시 저장
             post.save()
-            return redirect('post_detail', pk=post.id)
+            return redirect('firstapp:post_detail', pk=post.id)
     else:
         form = PostForm(instance=post)
     context = {'form': form, 'edit':True}
@@ -80,9 +80,9 @@ def post_delete(request, pk):
     post = get_object_or_404(Post, pk=pk)
     if request.user != post.author:
         messages.error(request, '삭제권한이 없습니다')
-        return redirect('post_detail', pk=post.id)
+        return redirect('firstapp:post_detail', pk=post.id)
     post.delete()
-    return redirect('post_list')
+    return redirect('firstapp:post_list')
     
 
 def view_stock(request):

@@ -12,6 +12,7 @@
     </div>
     <form method="post" class="post-form" action="{% url 'common:signup' %}">
         {% csrf_token %}
+        {% include "form_errors.html" %}
         <div class="form-group">
             <label for="username">사용자 이름</label>
             <input type="text" class="form-control" name="username" id="username"
@@ -32,7 +33,6 @@
             <input type="text" class="form-control" name="email" id="email"
                    value="{{ form.email.value|default_if_none:'' }}" autocomplete="off">
         </div>
-        {% include "form_errors.html" %}
         <button type="submit" class="btn btn-primary">생성하기</button>
     </form>
 </div>
