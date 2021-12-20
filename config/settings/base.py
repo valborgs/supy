@@ -25,7 +25,7 @@ ROOT_DIR = os.path.dirname(BASE_DIR)
 SECRET_KEY = '2laqv3u55vy+nxl1c(eb^k&g=37p&zh&-3%^ep-52o!u3%b4_3' #os.environ['SECRET_KEY']
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ["13.209.105.133"]
 
