@@ -35,7 +35,7 @@
                     <li><a href="{% url 'firstapp:lh_notice' %}">LH</a></li>
                     {% if user.is_authenticated %}
                     <!--li><a href="">Mypage</a></li-->
-                    <li><a href="{% url 'common:logout' %}">Logout</a></li>    
+                    <li><a href="{% url 'common:logout' %}?next={{ request.path }}">Logout</a></li>    
                     {% else %}
                     <li><a href="{% url 'common:login' %}">Login</a></li>    
                     {% endif %}
@@ -49,7 +49,7 @@
                 <li><a href="{% url 'firstapp:lh_notice' %}">LH</a></li>
                 {% if user.is_authenticated %}
                 <!--li><a href="">Mypage</a></li-->
-                <li><a href="{% url 'common:logout' %}">Logout</a></li>    
+                <li><a href="{% url 'common:logout' %}?next={{ request.path }}">Logout</a></li>    
                 {% else %}
                 <li><a href="{% url 'common:login' %}">Login</a></li>    
                 {% endif %}

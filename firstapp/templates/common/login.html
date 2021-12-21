@@ -11,7 +11,7 @@
       {{ form.as_p }}
     {% include "form_errors.html" %}
       <input type="submit" class="btn btn-primary" value="Login">
-      <input type="hidden" name="next" value="{{ Next }}" />
+      <input type="hidden" name="next" value="{{ request.GET.next }}" />
   </form>
     
   <div class="col-8 text-right">

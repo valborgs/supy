@@ -32,13 +32,13 @@ def post_list(request):
     posts = paginator.get_page(page)
     return render(request, 'firstapp/post_list.html', {'posts': posts})
 
-@login_required(login_url='/common/login/')
+@login_required(login_url='/common/login/', redirect_field_name='next') # login시 redirect되는 페이지를 직접 redirect_field_name으로 지정, login.html에서 hidden값으로 next 설정
 def post_detail(request, pk):
     post = get_object_or_404(Post,pk=pk) #해당 글이 없으면 404페이지를 보여줌
     #post = Post.objects.get(pk=pk)
     return render(request, 'firstapp/post_detail.html', {'post': post})
 
-@login_required(login_url='/common/login/')
+@login_required(login_url='/common/login/', redirect_field_name='next')
 def post_new(request):
     if request.method == "POST":
         form = PostForm(request.POST)
@@ -53,7 +53,7 @@ def post_new(request):
     return render(request, 'firstapp/post_edit.html', {'form': form})
 
 
-@login_required(login_url='/common/login/')
+@login_required(login_url='/common/login/', redirect_field_name='next')
 def post_modify(request, pk):
     post = get_object_or_404(Post, pk=pk)
     if request.user != post.author:
@@ -75,7 +75,7 @@ def post_modify(request, pk):
     return render(request, 'firstapp/post_edit.html', context)
 
 
-@login_required(login_url='/common/login/')
+@login_required(login_url='/common/login/', redirect_field_name='next')
 def post_delete(request, pk):
     post = get_object_or_404(Post, pk=pk)
     if request.user != post.author:

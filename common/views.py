@@ -1,6 +1,7 @@
 from django.contrib.auth import authenticate, login
 from django.shortcuts import render, redirect
 from common.forms import UserForm
+from django.conf import settings
 
 # Create your views here.
 
@@ -8,13 +9,13 @@ def page_not_found(request, exception):
     """
     404 Page not found
     """
-    return render(request, 'common/404.html', {})
+    return render(request, 'common/404.html', status=404)
 
 def internal_server_error(request):
     """
     500 Internal Server Error
     """
-    return render(request, 'common/500.html', {})
+    return render(request, 'common/500.html', status=500)
 
 
 def signup(request):
